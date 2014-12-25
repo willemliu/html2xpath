@@ -1,0 +1,5 @@
+IMDB Mobile ratings:
+http://html2xpath/?u=http://m.imdb.com/title/tt2310332&x[0]=//div[contains(@id,'ratings-bar')]/div/span[2]&x[1]=//div[contains(@id,'ratings-bar')]/div/span[2]/small/text()[2]
+
+IMDB ratings:
+http://html2xpath/?u=http://www.imdb.com/title/tt2310332&x[0]=//div[contains(@class,'star-box-giga-star')]&x[1]=//span[@itemprop='ratingCount']
