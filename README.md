@@ -4,6 +4,12 @@ html2xpath
 Traverse given URL by XPath and returns selected element as JSON.
 
 ## Usage
+| Parameter | Description |
+| ---- | --------------------------------------------------------- |
+| u    | The URL to the webpage to execute the given XPath queries. |
+| x[n] | The XPath query to execute. You can run multiple XPath queries in a single request. The JSON response will show the results for each query. Remember to increment the [`n`] as a 0-based index |
+
+
 Note that IMDB information is protected by Copyright. The following is for educational purposes only.
 
 Retrieve IMDB Mobile ratings:
