@@ -73,7 +73,7 @@
         }
       }
 
-      $el["textContent"] = [$textContent];
+      $el["textContent"] = $textContent;
       $json[$idx] = $el;
     }
     $idx++;
