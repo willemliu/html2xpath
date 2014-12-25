@@ -6,7 +6,7 @@
   ini_set('display_errors', 1);
   $start = microtime(true);
 
-  //header('Content-type: application/json');
+  header('Content-type: application/json');
 
   $ch = curl_init(); 
 
