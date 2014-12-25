@@ -7,7 +7,7 @@ Traverse given URL by XPath and returns selected element as JSON.
 | Parameter | Required | Description |
 | --------- |:---:| --------------------------------------------------------- |
 | u         | Yes | The URL to the webpage to execute the given XPath queries. |
-| x[n]      | Yes | The XPath query to execute. You can run multiple XPath queries in a single request. The JSON response will show the results for each query. Remember to increment the [`n`] as a 0-based index |
+| x[*n*]      | Yes | The XPath query to execute. You can run multiple XPath queries in a single request. The JSON response will show the results for each query. Remember to increment the [*n*] as a 0-based index for every query. |
 | curl_info | No  | If this parameter is set then the curl info will be included in the response. This parameter expects no value. |
 
 
