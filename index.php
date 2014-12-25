@@ -51,7 +51,10 @@
     ];
     $nodes = $xpath->query($query);
     foreach($nodes as $node) {
-      $el = [];
+      $el = [
+        "attributes" => [],
+        "textContent" => ""
+      ];
       // Get all attributes
       if($node->hasAttributes()) {
         foreach($node->attributes as $attribute) {
