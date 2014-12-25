@@ -45,7 +45,10 @@
   $idx = 0;
   foreach($queries as $query) {
     // Create the placeholder so we have an array even when the query doesn't resolve.
-    $json[$idx] = [];
+    $json[$idx] = [
+      "attributes" => [],
+      "textContent" => ""
+    ];
     $nodes = $xpath->query($query);
     foreach($nodes as $node) {
       $el = [];
