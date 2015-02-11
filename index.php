@@ -42,50 +42,49 @@
   }
 
   function processNodes($nodes) {
-    $json = [
-      "name" => "",
-      "attributes" => [],
-      "textContent" => ""
-    ];
+    $json = [];
     foreach($nodes as $node) {
-      $json["name"] = $node->nodeName;
+      $el = [];
+      $el["name"] = $node->nodeName;
       // Get all attributes
       if($node->hasAttributes()) {
         foreach($node->attributes as $attribute) {
-          $json["attributes"] = [];
-          array_push($json["attributes"], [$attribute->nodeName=>$attribute->textContent]);
+          $el["attributes"] = [];
+          array_push($el["attributes"], [$attribute->nodeName=>$attribute->textContent]);
         }
       }
       
       $textContent = $node->textContent;
       // Get the text content of this node only and not of the children.
       if($node->hasChildNodes()) {
-        $json["children"] = [];
+        $el["children"] = [];
         foreach( $node->childNodes as $child) {
           if( $child->nodeType === XML_TEXT_NODE) {
             $textContent = $child->textContent;
             break;
           }
         }
-        //array_push($json["children"], processNodes($node->childNodes));
+        array_push($el["children"], processNodes($node->childNodes));
       }
-      $json["textContent"] = $textContent;
+      $el["textContent"] = $textContent;
+      array_push($json, $el);
     }
     return $json;
   }
   
-  $json = [];
   foreach($queries as $query) {
     // Create the placeholder so we have an array even when the query doesn't resolve.
     $nodes = $xpath->query($query);
-    array_push($json, processNodes($nodes));
+    $json = processNodes($nodes);
   }
   
   if(sizeof($json) == 0) {
-    $json[0] = [
-      "attributes" => [],
-      "textContent" => ""
-    ];
+    foreach($queries as $key=>$query) {
+      $json[$key] = [
+        "attributes" => [],
+        "textContent" => ""
+      ];
+    }
   }
   
   if(isset($curlInfo)) {
