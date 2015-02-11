@@ -73,10 +73,10 @@
       $json = $el;
     }
     if(sizeof($json) == 0) {
-      $json[0] = [
+      $json = {
         "attributes" => [],
         "textContent" => ""
-      ];
+      };
     }
     return $json;
   }
