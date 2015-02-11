@@ -42,41 +42,34 @@
   }
 
   function processNodes($nodes) {
-    $json = [];
+    $json = [
+      "name" => "",
+      "attributes" => [],
+      "textContent" => ""
+    ];
     foreach($nodes as $node) {
-      $el = [
-        "name" => $node->nodeName,
-        "attributes" => [],
-        "textContent" => ""
-      ];
+      $json["name"] = $node->nodeName;
       // Get all attributes
       if($node->hasAttributes()) {
         foreach($node->attributes as $attribute) {
-          $el["attributes"] = [];
-          array_push($el["attributes"], [$attribute->nodeName=>$attribute->textContent]);
+          $json["attributes"] = [];
+          array_push($json["attributes"], [$attribute->nodeName=>$attribute->textContent]);
         }
       }
       
       $textContent = $node->textContent;
       // Get the text content of this node only and not of the children.
       if($node->hasChildNodes()) {
-        $el["children"] = [];
+        $json["children"] = [];
         foreach( $node->childNodes as $child) {
           if( $child->nodeType === XML_TEXT_NODE) {
             $textContent = $child->textContent;
             break;
           }
         }
-        array_push($el["children"], processNodes($node->childNodes));
+        //array_push($json["children"], processNodes($node->childNodes));
       }
-      $el["textContent"] = $textContent;
-      $json = $el;
-    }
-    if(sizeof($json) == 0) {
-      $json = {
-        "attributes" => [],
-        "textContent" => ""
-      };
+      $json["textContent"] = $textContent;
     }
     return $json;
   }
