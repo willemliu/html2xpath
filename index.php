@@ -69,22 +69,20 @@
       $el["textContent"] = $textContent;
       array_push($json, $el);
     }
-    return $json;
-  }
-  
-  foreach($queries as $query) {
-    // Create the placeholder so we have an array even when the query doesn't resolve.
-    $nodes = $xpath->query($query);
-    $json = processNodes($nodes);
-  }
-  
-  if(sizeof($json) == 0) {
-    foreach($queries as $key=>$query) {
-      $json[$key] = [
+    if(sizeof($json) == 0) {
+      $el = [
         "attributes" => [],
         "textContent" => ""
       ];
+      array_push($json, $el);
     }
+    return $json;
+  }
+  
+  foreach($queries as $key=>$query) {
+    // Create the placeholder so we have an array even when the query doesn't resolve.
+    $nodes = $xpath->query($query);
+    $json[$key] = processNodes($nodes);
   }
   
   if(isset($curlInfo)) {
