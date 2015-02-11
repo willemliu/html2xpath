@@ -72,6 +72,12 @@
       $el["textContent"] = $textContent;
       $json = $el;
     }
+    if(sizeof($json) == 0) {
+      $json[0] = [
+        "attributes" => [],
+        "textContent" => ""
+      ];
+    }
     return $json;
   }
   
