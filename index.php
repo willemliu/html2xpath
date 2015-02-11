@@ -42,13 +42,8 @@
   }
 
   $json = [];
-  $idx = 0;
   foreach($queries as $query) {
     // Create the placeholder so we have an array even when the query doesn't resolve.
-    $json[$idx] = [
-      "attributes" => [],
-      "textContent" => ""
-    ];
     $nodes = $xpath->query($query);
     foreach($nodes as $node) {
       $el = [
@@ -74,9 +69,15 @@
       }
 
       $el["textContent"] = $textContent;
-      $json[$idx] = $el;
+      array_push($json, $el);
     }
-    $idx++;
+  }
+  
+  if(sizeof($json) == 0) {
+    $json[0] = [
+      "attributes" => [],
+      "textContent" => ""
+    ];
   }
   
   if(isset($curlInfo)) {
